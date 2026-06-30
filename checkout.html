@@ -23,46 +23,45 @@ max-width:500px;
 margin:auto;
 background:#fff;
 padding:20px;
-border-radius:12px;
-box-shadow:0 5px 15px rgba(0,0,0,.15);
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.2);
 }
 
 h1{
 text-align:center;
 margin-bottom:20px;
+color:#111;
 }
 
 label{
 display:block;
 margin-top:15px;
+margin-bottom:5px;
 font-weight:bold;
 }
 
-input,textarea,select{
+input,
+textarea,
+select{
 width:100%;
 padding:12px;
-margin-top:6px;
 border:1px solid #ccc;
 border-radius:8px;
 font-size:16px;
 }
 
 textarea{
-height:100px;
+height:90px;
 resize:none;
 }
 
 .payment-box{
 display:none;
-background:#f8f8f8;
-border:1px solid #ddd;
-padding:12px;
 margin-top:15px;
-border-radius:8px;
-}
-
-.payment-box h3{
-margin-bottom:10px;
+padding:15px;
+background:#fafafa;
+border:1px solid #ddd;
+border-radius:10px;
 }
 
 button{
@@ -72,7 +71,7 @@ margin-top:20px;
 background:#111;
 color:#fff;
 border:none;
-border-radius:8px;
+border-radius:10px;
 font-size:18px;
 cursor:pointer;
 }
@@ -81,6 +80,7 @@ button:hover{
 background:#333;
 }
 </style>
+
 </head>
 
 <body>
@@ -92,16 +92,22 @@ background:#333;
 <form id="orderForm">
 
 <label>Full Name</label>
-<input type="text" required>
+<input type="text" id="name" placeholder="Enter your full name" required>
 
 <label>Phone Number</label>
-<input type="tel" required>
+<input type="tel" id="phone" placeholder="01XXXXXXXXX" required>
 
-<label>Delivery Address</label>
-<textarea required></textarea>
+<label>District (জেলা)</label>
+<input type="text" id="district" placeholder="Cumilla" required>
+
+<label>Thana / Upazila</label>
+<input type="text" id="thana" placeholder="Debidwar" required>
+
+<label>Full Address</label>
+<textarea id="address" placeholder="Village / Road / House No." required></textarea>
 
 <label>Select Size</label>
-<select required>
+<select id="size" required>
 <option value="">Choose Size</option>
 <option>S</option>
 <option>M</option>
@@ -109,17 +115,31 @@ background:#333;
 <option>XL</option>
 </select>
 
+<label>Quantity</label>
+<input type="number" id="qty" value="1" min="1" required>
+
 <label>Payment Method</label>
+
 <select id="payment" required>
+
 <option value="">Select Payment</option>
+
 <option value="cod">Cash On Delivery</option>
+
 <option value="bkash">bKash</option>
+
 <option value="nagad">Nagad</option>
+
 </select>
 
 <div id="paymentInfo" class="payment-box"></div>
 
-<button type="submit">Place Order</button>
+<label>Order Note (Optional)</label>
+
+<textarea id="note" placeholder="Write your note..."
+></textarea><div id="paymentInfo" class="payment-box"></div>
+
+<button type="submit">🛒 Place Order</button>
 
 </form>
 
@@ -127,41 +147,52 @@ background:#333;
 
 <script>
 
-const payment=document.getElementById("payment");
-const box=document.getElementById("paymentInfo");
+const payment = document.getElementById("payment");
+const box = document.getElementById("paymentInfo");
 
-payment.addEventListener("change",function(){
+payment.addEventListener("change", function(){
 
 if(this.value==="bkash"){
+
 box.style.display="block";
+
 box.innerHTML=`
-<h3>bKash Payment</h3>
-<p>Send Money To:</p>
+<h3>🟣 bKash Payment</h3>
+<p>Send Money To</p>
 <h2>01609198896</h2>
 <p>Type: Personal</p>
 `;
+
 }
 
 else if(this.value==="nagad"){
+
 box.style.display="block";
+
 box.innerHTML=`
-<h3>Nagad Payment</h3>
-<p>Send Money To:</p>
+<h3>🟠 Nagad Payment</h3>
+<p>Send Money To</p>
 <h2>01609198896</h2>
 <p>Type: Personal</p>
 `;
+
 }
 
 else if(this.value==="cod"){
+
 box.style.display="block";
+
 box.innerHTML=`
-<h3>Cash On Delivery</h3>
-<p>Pay cash when your order is delivered.</p>
+<h3>🚚 Cash On Delivery</h3>
+<p>Pay when you receive your parcel.</p>
 `;
+
 }
 
 else{
+
 box.style.display="none";
+
 }
 
 });
@@ -170,15 +201,35 @@ document.getElementById("orderForm").addEventListener("submit",function(e){
 
 e.preventDefault();
 
-alert("🎉 Thank you! Your order has been received.");
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+let district=document.getElementById("district").value;
+let thana=document.getElementById("thana").value;
+let address=document.getElementById("address").value;
+let size=document.getElementById("size").value;
+let qty=document.getElementById("qty").value;
+let pay=document.getElementById("payment").value;
+let note=document.getElementById("note").value;
 
-this.reset();
+let msg=`🛒 *Baby Shark Store Order*
 
-box.style.display="none";
+👤 Name: ${name}
+📞 Phone: ${phone}
 
-});
+🏙️ District: ${district}
+📍 Thana: ${thana}
 
-</script>
+🏠 Address:
+${address}
 
+👕 Size: ${size}
+🔢 Quantity: ${qty}
+
+💳 Payment: ${pay}
+
+📝 Order Note:
+${note}`;
+
+let url="https://wa.me/8801609198896?text="+encode
 </body>
 </html>
