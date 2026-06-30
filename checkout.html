@@ -1,54 +1,131 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout - Baby Shark Store</title>
+
 <style>
-body{font-family:Arial;background:#f5f5f5;padding:20px;}
-.box{max-width:450px;margin:auto;background:#fff;padding:20px;border-radius:10px;}
-input,select{
-width:100%;
-padding:10px;
-margin:10px 0;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
-button{
+
+body{
+background:#f4f4f4;
+}
+
+.container{
+max-width:500px;
+margin:30px auto;
+background:#fff;
+padding:20px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+h1{
+text-align:center;
+margin-bottom:20px;
+}
+
+label{
+font-weight:bold;
+display:block;
+margin-top:15px;
+margin-bottom:5px;
+}
+
+input, textarea, select{
 width:100%;
 padding:12px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
+}
+
+textarea{
+height:100px;
+resize:none;
+}
+
+button{
+width:100%;
+padding:15px;
 background:#000;
 color:#fff;
 border:none;
-border-radius:6px;
+border-radius:8px;
+font-size:18px;
+margin-top:20px;
+cursor:pointer;
+}
+
+button:hover{
+background:#333;
+}
+
+.note{
+text-align:center;
+color:#666;
+margin-top:15px;
+font-size:14px;
 }
 </style>
+
 </head>
 <body>
 
-<div class="box">
-<h2>Checkout</h2>
+<div class="container">
 
-<input type="text" placeholder="Full Name" required>
-<input type="tel" placeholder="Phone Number" required>
-<textarea style="width:100%;height:100px;" placeholder="Full Address"></textarea>
+<h1>Baby Shark Store</h1>
 
-<select>
-<option>Select Size</option>
+<form id="orderForm">
+
+<label>Full Name</label>
+<input type="text" required>
+
+<label>Phone Number</label>
+<input type="tel" required>
+
+<label>Delivery Address</label>
+<textarea required></textarea>
+
+<label>Select Size</label>
+<select required>
+<option value="">Choose Size</option>
 <option>S</option>
 <option>M</option>
 <option>L</option>
 <option>XL</option>
 </select>
 
-<select>
-<option>Cash on Delivery</option>
+<label>Payment Method</label>
+<select required>
+<option>Cash On Delivery</option>
 <option>bKash</option>
 <option>Nagad</option>
 </select>
 
-<button onclick="alert('Order Received!')">Place Order</button>
+<button type="submit">Place Order</button>
+
+</form>
+
+<p class="note">Thank you for shopping with Baby Shark Store ❤️</p>
 
 </div>
+
+<script>
+document.getElementById("orderForm").addEventListener("submit", function(e){
+e.preventDefault();
+
+alert("✅ Your order has been placed successfully!");
+
+this.reset();
+});
+</script>
 
 </body>
 </html>
