@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Checkout - Baby Shark Store</title>
+<title>Baby Shark Store - Checkout</title>
 
 <style>
 *{
@@ -15,11 +15,12 @@ font-family:Arial,sans-serif;
 
 body{
 background:#f4f4f4;
+padding:20px;
 }
 
 .container{
 max-width:500px;
-margin:30px auto;
+margin:auto;
 background:#fff;
 padding:20px;
 border-radius:12px;
@@ -32,15 +33,15 @@ margin-bottom:20px;
 }
 
 label{
-font-weight:bold;
 display:block;
 margin-top:15px;
-margin-bottom:5px;
+font-weight:bold;
 }
 
-input, textarea, select{
+input,textarea,select{
 width:100%;
 padding:12px;
+margin-top:6px;
 border:1px solid #ccc;
 border-radius:8px;
 font-size:16px;
@@ -51,31 +52,37 @@ height:100px;
 resize:none;
 }
 
+.payment-box{
+display:none;
+background:#f8f8f8;
+border:1px solid #ddd;
+padding:12px;
+margin-top:15px;
+border-radius:8px;
+}
+
+.payment-box h3{
+margin-bottom:10px;
+}
+
 button{
 width:100%;
 padding:15px;
-background:#000;
+margin-top:20px;
+background:#111;
 color:#fff;
 border:none;
 border-radius:8px;
 font-size:18px;
-margin-top:20px;
 cursor:pointer;
 }
 
 button:hover{
 background:#333;
 }
-
-.note{
-text-align:center;
-color:#666;
-margin-top:15px;
-font-size:14px;
-}
 </style>
-
 </head>
+
 <body>
 
 <div class="container">
@@ -103,28 +110,74 @@ font-size:14px;
 </select>
 
 <label>Payment Method</label>
-<select required>
-<option>Cash On Delivery</option>
-<option>bKash</option>
-<option>Nagad</option>
+<select id="payment" required>
+<option value="">Select Payment</option>
+<option value="cod">Cash On Delivery</option>
+<option value="bkash">bKash</option>
+<option value="nagad">Nagad</option>
 </select>
+
+<div id="paymentInfo" class="payment-box"></div>
 
 <button type="submit">Place Order</button>
 
 </form>
 
-<p class="note">Thank you for shopping with Baby Shark Store ❤️</p>
-
 </div>
 
 <script>
-document.getElementById("orderForm").addEventListener("submit", function(e){
+
+const payment=document.getElementById("payment");
+const box=document.getElementById("paymentInfo");
+
+payment.addEventListener("change",function(){
+
+if(this.value==="bkash"){
+box.style.display="block";
+box.innerHTML=`
+<h3>bKash Payment</h3>
+<p>Send Money To:</p>
+<h2>01609198896</h2>
+<p>Type: Personal</p>
+`;
+}
+
+else if(this.value==="nagad"){
+box.style.display="block";
+box.innerHTML=`
+<h3>Nagad Payment</h3>
+<p>Send Money To:</p>
+<h2>01609198896</h2>
+<p>Type: Personal</p>
+`;
+}
+
+else if(this.value==="cod"){
+box.style.display="block";
+box.innerHTML=`
+<h3>Cash On Delivery</h3>
+<p>Pay cash when your order is delivered.</p>
+`;
+}
+
+else{
+box.style.display="none";
+}
+
+});
+
+document.getElementById("orderForm").addEventListener("submit",function(e){
+
 e.preventDefault();
 
-alert("✅ Your order has been placed successfully!");
+alert("🎉 Thank you! Your order has been received.");
 
 this.reset();
+
+box.style.display="none";
+
 });
+
 </script>
 
 </body>
