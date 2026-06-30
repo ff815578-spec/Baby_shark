@@ -1,1 +1,54 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout - Baby Shark Store</title>
+<style>
+body{font-family:Arial;background:#f5f5f5;padding:20px;}
+.box{max-width:450px;margin:auto;background:#fff;padding:20px;border-radius:10px;}
+input,select{
+width:100%;
+padding:10px;
+margin:10px 0;
+}
+button{
+width:100%;
+padding:12px;
+background:#000;
+color:#fff;
+border:none;
+border-radius:6px;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+<h2>Checkout</h2>
+
+<input type="text" placeholder="Full Name" required>
+<input type="tel" placeholder="Phone Number" required>
+<textarea style="width:100%;height:100px;" placeholder="Full Address"></textarea>
+
+<select>
+<option>Select Size</option>
+<option>S</option>
+<option>M</option>
+<option>L</option>
+<option>XL</option>
+</select>
+
+<select>
+<option>Cash on Delivery</option>
+<option>bKash</option>
+<option>Nagad</option>
+</select>
+
+<button onclick="alert('Order Received!')">Place Order</button>
+
+</div>
+
+</body>
+</html>
